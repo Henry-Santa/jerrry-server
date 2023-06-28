@@ -74,8 +74,9 @@ const PET_DATA = {
   },
   "FLYING_FISH": {
     
-default: "https://nmsr.nickac.dev/headiso/40cd71fbbbbb66c7baf7881f415c64fa84f6504958a57ccdb8589252647ea",
-  "type":fishing
+"default": "https://nmsr.nickac.dev/headiso/40cd71fbbbbb66c7baf7881f415c64fa84f6504958a57ccdb8589252647ea",
+head: "https://nmsr.nickac.dev/headiso/dab779bbccc849f88273d844e8ca2f3a67a1699cb216c0a11b44326ce2cc20",
+type:"fishing"
   },
   "BLUE_WHALE": {
     head: "https://nmsr.nickac.dev/headiso/dab779bbccc849f88273d844e8ca2f3a67a1699cb216c0a11b44326ce2cc20",
@@ -373,13 +374,14 @@ class data{
                                 data.itemTable.get(item)["leg1"] = priceData[item.slice(3).toUpperCase() + ";4"];
                                 // level 100 cost legendary
                                 
-                                data.itemTable.get(item)["leg100"] = priceData[item.slice(3).toUpperCase() + ";4"] + priceformax[PET_DATA[item.id].type+"leg"];
+                                console.log(data.itemTable.get(item).id, data.itemTable.get(item))
+                                data.itemTable.get(item)["leg100"] = priceData[item.slice(3).toUpperCase() + ";4"] + priceformax[PET_DATA[data.itemTable.get(item).id].type+"leg"];
                                 // level 1 cost epic
                                 
                                 data.itemTable.get(item)["epic1"] = priceData[item.slice(3).toUpperCase() + ";3"];
                                 // level 100 cost epic
                                 
-                                data.itemTable.get(item)["epic100"] = priceData[item.slice(3).toUpperCase() + ";4"] + priceformax[PET_DATA[item.id].type+"epic"];
+                                data.itemTable.get(item)["epic100"] = priceData[item.slice(3).toUpperCase() + ";4"] + priceformax[PET_DATA[data.itemTable.get(item).id].type+"epic"];
                                 resolve()
                                 }
                             )
