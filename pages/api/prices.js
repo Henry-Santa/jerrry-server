@@ -298,12 +298,13 @@ class data{
     static async start() {
 
         
-        if (data.isrunning) {return}
+        if (data.isrunning) {return {"message" :"DATA NOT READY"}}
         data.isrunning = true;
-        data.#performTask()
+        await data.#performTask()
         setInterval(() => {
             data.#performTask();
         }, 60 * 60 * 1000);
+        return data.getItemTable();
 
     }
     static async #performTask(){
@@ -423,14 +424,15 @@ class data{
 
 
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
     var d = data.getItemTable()
-    console.log(d);
+    console.log(data.isrunning)
+    //console.log(d);
     if (Object.keys(d).length > 0){
         res.status(200).json(d);
     } else{
-        data.start()
-        res.status(500).json({message: "data not ready yet"})
+        
+        res.status(500).json(await data.start())
     }
     
 }
