@@ -381,7 +381,7 @@ class data{
                                 data.itemTable.get(item)["epic1"] = priceData[item.slice(3).toUpperCase() + ";3"];
                                 // level 100 cost epic
                                 
-                                data.itemTable.get(item)["epic100"] = priceData[item.slice(3).toUpperCase() + ";4"] + priceformax[PET_DATA[data.itemTable.get(item).id].type+"epic"];
+                                data.itemTable.get(item)["epic100"] = priceData[item.slice(3).toUpperCase() + ";3"] + priceformax[PET_DATA[data.itemTable.get(item).id].type+"epic"];
                                 resolve()
                                 }
                             )
@@ -392,7 +392,7 @@ class data{
                             
                             try {
                                 
-                                data.itemTable.get(item)["price"] = priceData[item];
+                                data.itemTable.get(item)["price"] = priceData[data.itemTable.get(item).id];
                             } catch (error) {
                                 console.error('Error occurred while updating item price:', error);
                             }
