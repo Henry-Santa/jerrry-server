@@ -372,17 +372,17 @@ class data{
 
                                 // level 1 cost legendary
                                 
-                                data.itemTable.get(item)["leg1"] = priceData[item.slice(3).toUpperCase() + ";4"];
+                                data.itemTable.get(item)["leg1"] = priceData[item.slice(3).toUpperCase() + ";4"].price;
                                 // level 100 cost legendary
                                 
                                 console.log(data.itemTable.get(item).id, data.itemTable.get(item))
-                                data.itemTable.get(item)["leg100"] = priceData[item.slice(3).toUpperCase() + ";4"] + priceformax[PET_DATA[data.itemTable.get(item).id].type+"leg"];
+                                data.itemTable.get(item)["leg100"] = priceData[item.slice(3).toUpperCase() + ";4"].price + priceformax[PET_DATA[data.itemTable.get(item).id].type+"leg"];
                                 // level 1 cost epic
                                 
-                                data.itemTable.get(item)["epic1"] = priceData[item.slice(3).toUpperCase() + ";3"];
+                                data.itemTable.get(item)["epic1"] = priceData[item.slice(3).toUpperCase() + ";3"].price;
                                 // level 100 cost epic
                                 
-                                data.itemTable.get(item)["epic100"] = priceData[item.slice(3).toUpperCase() + ";3"] + priceformax[PET_DATA[data.itemTable.get(item).id].type+"epic"];
+                                data.itemTable.get(item)["epic100"] = priceData[item.slice(3).toUpperCase() + ";3"].price + priceformax[PET_DATA[data.itemTable.get(item).id].type+"epic"];
                                 resolve()
                                 }
                             )
@@ -393,7 +393,7 @@ class data{
                             
                             try {
                                 
-                                data.itemTable.get(item)["price"] = priceData[data.itemTable.get(item).id];
+                                data.itemTable.get(item)["price"] = priceData[data.itemTable.get(item).id].price;
                             } catch (error) {
                                 console.error('Error occurred while updating item price:', error);
                             }
