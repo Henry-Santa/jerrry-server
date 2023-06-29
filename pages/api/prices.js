@@ -352,7 +352,7 @@ class data{
         }
         let promises = []
 
-        let NEU = "https://moulberry.codes/auction_averages_lbin/1day.json.gz"
+        let NEU = "https://moulberry.codes/auction_averages/3day.json.gz"
         let neuresp = await fetch(NEU);
         const compressedData = await neuresp.arrayBuffer();
 
