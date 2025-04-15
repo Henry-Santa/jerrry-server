@@ -322,14 +322,11 @@ class data{
                 real_name = real_name.replace(reforge, "")
             })
             var image_link = "https://henry-santa.github.io/auction-manipulation/images/" + item.material.toLowerCase() + ".png"
-            if (item.material == "SKULL_ITEM"){
-                if (item.skin == undefined){
-
-                } else{
-                    var hash = JSON.parse(atob(item.skin)).textures.SKIN.url.split("/")
-                    hash = hash[hash.length-1]
-                    image_link = "https://nmsr.nickac.dev/headiso/" + hash
-                    
+            if (item.material == "SKULL_ITEM") {
+                const skinUrl = getSkinUrl(item);
+                if (skinUrl) {
+                    const hash = skinUrl.split("/").pop();
+                    image_link = "https://nmsr.nickac.dev/headiso/" + hash;
                 }
             }
 
@@ -427,17 +424,32 @@ class data{
 
 }
 
+const getSkinUrl = (item) => {
+    if (!item.skin) return null;
+    try {
+        const decoded = Buffer.from(item.skin, 'base64').toString();
+        const skinData = JSON.parse(decoded);
+        return skinData?.textures?.SKIN?.url;
+    } catch (error) {
+        console.warn('Error parsing skin data:', error);
+        return null;
+    }
+};
 
+export { data };
 
 export default async function handler(req, res) {
-    var d = data.getItemTable()
-    console.log(data.isrunning)
-    //console.log(d);
-    if (Object.keys(d).length > 0){
-        res.status(200).json(d);
-    } else{
-        
-        res.status(500).json(await data.start())
+    try {
+        let d = data.getItemTable();
+        if (Object.keys(d).length > 0) {
+            res.status(200).json(d);
+        } else {
+            // If data is not initialized, initialize it
+            d = await data.start();
+            res.status(200).json(d);
+        }
+    } catch (error) {
+        console.error('Error in prices API:', error);
+        res.status(500).json({ error: 'Internal server error', details: error.message });
     }
-    
 }
